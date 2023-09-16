@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -7,10 +8,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+=======
+>>>>>>> aa5e64875c7e612dae90b65744d9c750e1e0951e
 # CarbossPinturas
 
 Proyecto creado en laravel  
 Se cotizaran costos sobre lo que conlleva comprar botes de pinturas y el servicio de pintado  
+<<<<<<< HEAD
 Asi pues los contratistas tendran una excelente herramienta que les ayude a calcular su presupuesto
 
 ## About Laravel
@@ -70,3 +74,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+Asi pues los contratistas tendran una excelente herramienta que les ayude a calcular su presupuesto
+>>>>>>> aa5e64875c7e612dae90b65744d9c750e1e0951e
