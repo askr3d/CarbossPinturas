@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
+        <title>Admin</title>
         <!--Este archivo importa las utilerias de tailwind-->
         @vite('resources/css/app.css')
 
@@ -16,17 +16,17 @@
                     <a href="/">Carboss Pinturas</a>
                 </h1>
                 <nav class="flex flex-col md:flex-row gap-6 items-center">
-                    <a href="/login" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Iniciar sesion</a>
-                    <a href="/register" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Crear cuenta</a>
+                    <h2 class="block text-center md:inline font-black uppercase  text-sm mb-5 md:mb-0">{{ Auth::user()->name }}</h2>
+                    <a href="{{ route('logout') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Cerrar sesion</a>
                 </nav>
             </div>
         </header>
 
         <main class="container mx-auto mt-10">
             <h2 class="font-black mb-10 text-center text-3xl">
-                Aqui va el titulo de la pagina
+                Bienvenido, {{ Auth::user()->name }}
             </h2>
-            <p class="text-center font-mono text-xs">Aqui va el contenido (Remplezar esta linea completa) con '@ yield()'</p>
+                <p class="text-center font-mono text-xs">Estás logeado como {{ Auth::user()->email }}</p>
         </main>
 
         <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">

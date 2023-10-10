@@ -24,9 +24,30 @@
 
         <main class="container mx-auto mt-10">
             <h2 class="font-black mb-10 text-center text-3xl">
-                Aqui va el titulo de la pagina
+                Login
             </h2>
-            <p class="text-center font-mono text-xs">Aqui va el contenido (Remplezar esta linea completa) con '@ yield()'</p>
+            <div class="flex justify-center items-center ">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <form action="/login" method="POST">
+                    @csrf
+
+                    <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                    @error('email')
+                        <div class="alert alert-danger" style="color: red;">{{ $message }}</div>
+                    @enderror
+
+                    <input type="password" name="password" placeholder="Password">
+                    @error('password')
+                        <div class="alert alert-danger" style="color: red;">{{ $message }}</div>
+                    @enderror
+                    <br>
+                    <input type="submit" name="Registrarse">
+                </form>
+            <div>
         </main>
 
         <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
