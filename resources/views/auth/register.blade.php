@@ -1,66 +1,63 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Registro</title>
-        <!--Este archivo importa las utilerias de tailwind-->
-        @vite('resources/css/app.css')
+@extends('layouts.app')
+@section('titulo')
+    Crear cuenta
+@endsection
 
+@section('contenido')
+    <div class="flex flex-col gap-3 md:flex-row md:gap-10 md:items-center justify-center">
+        <div class="md:w-6/12 md:flex md:justify-end">
+            <img class="rounded-md" src="{{ asset('img/register.webp') }}" alt="Imagen de registro">
+        </div>
 
-    </head>
-    <body class="bg-gray-100">
-        <header class="p-10 bg-white border-b shadow">
-            <div class="md:flex container mx-auto justify-between items-center">
-                <h1 class="text-4xl font-bold text-center mb-10 md:mb-0">
-                    <a href="/">Carboss Pinturas</a>
-                </h1>
-                <nav class="flex flex-col md:flex-row gap-6 items-center">
-                    <a href="/login" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Iniciar sesion</a>
-                    <a href="/register" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Crear cuenta</a>
-                </nav>
-            </div>
-        </header>
-
-        <main class="container mx-auto mt-10">
-            <h2 class="font-black mb-10 text-center text-3xl">
-                Crear cuenta
-            </h2>
-            <div class="flex justify-center items-center ">
-                <form action="/register" method="POST">
-                    @csrf
-                    <input type="text" name="name" placeholder="Nombre" value="{{ old('name') }}">
+        <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-lg">
+            <form action="/register" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="name" class="mb-2 block text-gray-500 uppercase font-bold">
+                        Nombre
+                    </label>
+                    <input id="name" class="border p-3 rounded-lg w-full" type="text" name="name" placeholder="Nombre" value="{{ old('name') }}">
                     @error('name')
                         <div style="color: red;">
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="mb-2 block text-gray-500 uppercase font-bold">
+                        Email
+                    </label>
+                    <input id="email" class="border p-3 rounded-lg w-full" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                     @error('email')
                         <div style="color: red;">
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="password" name="password" placeholder="Contraseña" >
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="mb-2 uppercase block text-gray-500 font-bold">
+                        Password
+                    </label>
+                    <input id="password" class="border p-3 rounded-lg w-full" type="password" name="password" placeholder="Contraseña" >
                     @error('password')
                         <div style="color: red;">
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="password" name="password_confirmation" placeholder="Confirmar contraseña">
+                </div>
+                <div class="mb-3">
+                    <label for="password_confirmation" class="mb-2 uppercase block text-gray-500 font-bold w-full">
+                        Confirmar Password
+                    </label>
+                    <input id="password_confirmation" class="border p-3 rounded-lg w-full" type="password" name="password_confirmation" placeholder="Confirmar contraseña">
                     @error('password_confirmation')
                         <div style="color: red;">
                             {{ $message }}
                         </div>
                     @enderror
-                    <br>
-                    <input type="submit" name="Registrarse">
-                </form>
-            <div>
-        </main>
-
-        <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
-            Carboss Pinturas - Todos los derechos reservados {{ now()->year }}
-        </footer>
-    </body>
-</html>
+                </div>
+                <input type="submit" class="bg-sky-600 hover:bg-sky-700 w-full p-2 text-white font-bold rounded-lg cursor-pointer uppercase transition-colors" name="Registrarse">
+            </form>
+        <div>
+    </div>
+@endsection

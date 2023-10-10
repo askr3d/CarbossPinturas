@@ -1,57 +1,42 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
-        <!--Este archivo importa las utilerias de tailwind-->
-        @vite('resources/css/app.css')
+@extends('layouts.app')
 
+@section('titulo')
+    Login
+@endsection
 
-    </head>
-    <body class="bg-gray-100">
-        <header class="p-10 bg-white border-b shadow">
-            <div class="md:flex container mx-auto justify-between items-center">
-                <h1 class="text-4xl font-bold text-center mb-10 md:mb-0">
-                    <a href="/">Carboss Pinturas</a>
-                </h1>
-                <nav class="flex flex-col md:flex-row gap-6 items-center">
-                    <a href="/login" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Iniciar sesion</a>
-                    <a href="/register" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Crear cuenta</a>
-                </nav>
-            </div>
-        </header>
-
-        <main class="container mx-auto mt-10">
-            <h2 class="font-black mb-10 text-center text-3xl">
-                Login
-            </h2>
-            <div class="flex justify-center items-center ">
+@section('contenido')
+    <div class="flex flex-col gap-3 md:flex-row md:gap-10 md:items-center justify-center">
+        <div class="md:w-6/12 md:flex md:justify-end">
+            <img class="rounded-md md:w-3/4" src="{{ asset('img/login.jpg') }}" alt="Imagen de Login">
+        </div>
+        <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-lg">
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
-                <form action="/login" method="POST">
-                    @csrf
-
-                    <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                <div class="mb-3">
+                    <label for="email" class="mb-2 block uppercase text-gray-500 font-bold">
+                        Email
+                    </label>
+                    <input id="email" class="border p-3 w-full rounded-lg" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                     @error('email')
                         <div class="alert alert-danger" style="color: red;">{{ $message }}</div>
                     @enderror
-
-                    <input type="password" name="password" placeholder="Password">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="mb-2 block uppercase text-gray-500 font-bold">
+                        Password
+                    </label>
+                    <input id="password" class="border p-3 w-full rounded-lg" type="password" name="password" placeholder="Password">
                     @error('password')
                         <div class="alert alert-danger" style="color: red;">{{ $message }}</div>
                     @enderror
-                    <br>
-                    <input type="submit" name="Registrarse">
-                </form>
-            <div>
-        </main>
-
-        <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
-            Carboss Pinturas - Todos los derechos reservados {{ now()->year }}
-        </footer>
-    </body>
-</html>
+                </div>
+                <input type="submit" class="bg-sky-600 hover:bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-2 text-white rounded-lg" name="Registrarse">
+            </form>
+        </div>
+    <div>
+@endsection
