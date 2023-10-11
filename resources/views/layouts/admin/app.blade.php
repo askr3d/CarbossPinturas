@@ -6,6 +6,8 @@
         <title>Laravel</title>
         <!--Este archivo importa las utilerias de tailwind-->
         @vite('resources/css/app.css')
+        @vite('resources/css/datatables.min.css')
+        @vite('resources/js/app.js')
 
 
     </head>
@@ -13,9 +15,9 @@
 
 
 
-        <div class="container flex justify-between">
+        <div class="flex justify-between">
 
-            <div class="w-1/6 h-screen bg-gray-950 p-5 flex flex-col justify-between">
+            <div class="w-1/6 h-fixed bg-gray-950 p-5 flex flex-col justify-between">
 
                 <div class="flex flex-col justify-between gap-5">
                     <span class="flex flex-col gap-4">
@@ -49,8 +51,8 @@
                 <a href="{{ route('logout') }}" class="block text-center md:inline font-bold uppercase text-neutral-400 text-sm mb-5 md:mb-0 hover:text-neutral-200">Cerrar sesion</a>
 
             </div>
-            <div class="w-5/6">
-                <main class="container mx-auto mt-10">
+            <div class="w-full overflow-y-scroll h-screen">
+                <main class="container mx-auto mt-10 p-10">
                     <h2 class="font-black mb-10 text-center text-3xl">
                         @yield('titulo')
                     </h2>

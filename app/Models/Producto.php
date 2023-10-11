@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
+    use HasFactory;
     protected $primaryKey = 'id_producto';
     public $timestamps = false;
 
 
-    use HasFactory;
     protected $fillable = [
         'nombre', 'descripcion', 'precio', 'existencia' // Agrega aquí los campos de tu modelo
     ];

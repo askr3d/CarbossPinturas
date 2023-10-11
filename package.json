@@ -12,5 +12,11 @@
         "postcss": "^8.4.29",
         "tailwindcss": "^3.3.3",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "datatables.net-buttons": "^2.4.2",
+        "datatables.net-dt": "^1.13.6",
+        "datatables.net-plugins": "^1.13.6",
+        "jquery": "^3.7.1"
     }
 }
