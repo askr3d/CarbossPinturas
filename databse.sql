@@ -1,0 +1,72 @@
+CREATE DATABASE IF NOT EXISTS carboss_pinturas;
+Use carboss_pinturas;
+
+CREATE TABLE IF NOT EXISTS permisos(
+    ID_PERMISO      INT auto_increment not null,
+    TIPO_PERMISO    VARCHAR(50) UNIQUE,
+
+    CONSTRAINT PK_permisos PRIMARY KEY(ID_PERMISO)
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS usuarios(
+    ID_USER     int auto_increment not null,
+    FK_PERMISO     int,
+    USER        varchar(20) UNIQUE,
+    PASSWORD    varchar(50) not null,
+    EMAIL       varchar(100) UNIQUE,
+
+    CONSTRAINT PK_users PRIMARY KEY(ID_USER),
+    CONSTRAINT FK_users_permiso FOREIGN KEY (FK_PERMISO) REFERENCES permisos(ID_PERMISO)
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS orden(
+    ID_ORDEN        INT auto_increment NOT null,
+    FK_USER         INT NOT NULL,
+    PRECIO_TOTAL    DECIMAL(10,2) NOT NULL,
+
+    CONSTRAINT PK_orden PRIMARY KEY(ID_ORDEN),
+    CONSTRAINT FK_orden_user FOREIGN KEY(FK_USER) REFERENCES usuarios(ID_USER)
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS servicios(
+    ID_SERVICIO     INT auto_increment NOT NULL,
+    TIPO_SERVICIO   INT UNIQUE,
+    NOMBRE          VARCHAR(50) NOT NULL,
+    COSTO_POR_M2    DECIMAL(10,2) NOT NULL,
+
+    CONSTRAINT PK_servicios PRIMARY KEY(ID_SERVICIO)
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS productos(
+    ID_PRODUCTO     INT auto_increment NOT NULL,
+    NOMBRE          VARCHAR(50) NOT NULL,
+    DESCRIPCION     VARCHAR(80) NOT NULL,
+    PRECIO          DECIMAL(10,2) NOT NULL,
+    EXISTENCIAS     INT NOT NULL,
+
+    CONSTRAINT PK_producto PRIMARY KEY(ID_PRODUCTO)
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS servicios_por_orden(
+    ID_SERVICIO_ORDEN   INT auto_increment,
+    FK_ORDEN            INT NOT NULL,
+    FK_SERVICIO         INT NOT NULL,
+    METROS              INT NOT NULL,
+    PRECIO              DECIMAL(10,2),
+
+    CONSTRAINT PK_servicios_por_orden PRIMARY KEY(ID_SERVICIO_ORDEN),
+    CONSTRAINT FK_Servicios_por_orden_o FOREIGN KEY(FK_ORDEN) REFERENCES orden(ID_ORDEN),
+    CONSTRAINT FK_Servicios_por_orden_s FOREIGN KEY(FK_SERVICIO) REFERENCES servicios(ID_SERVICIO)
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS productos_por_orden(
+    ID_PRODUCTO_ORDEN   INT auto_increment,
+    FK_ORDEN            INT NOT NULL,
+    FK_PRODUCTO         INT NOT NULL,
+    CANTIDAD            INT NOT NULL,
+    PRECIO              DECIMAL(10,2),
+
+    CONSTRAINT PK_productos_por_orden PRIMARY KEY(ID_PRODUCTO_ORDEN),
+    CONSTRAINT FK_productos_por_orden_o FOREIGN KEY(FK_ORDEN) REFERENCES orden(ID_ORDEN),
+    CONSTRAINT FK_productos_por_orden_P FOREIGN KEY(FK_PRODUCTO) REFERENCES productos(ID_PRODUCTO)
+)ENGINE=INNODB;

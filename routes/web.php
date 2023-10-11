@@ -3,6 +3,8 @@
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +39,32 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::prefix('admin')->middleware('auth')->group(function (){
 
-Route::get('/admin', function () {
+    Route::get('index', [AdminController::class, 'index'])->name('index');
+
+    //Productos
+    Route::get('product/productos', [ProductoController::class, 'ShowProductos'])->name('productos');
+    Route::get('product/{id}/edit', [ProductoController::class, 'edit'])->name('product.edit');
+
+    Route::get('product/add', [ProductoController::class, 'ShowAddForm'])->name('product.add');
+    Route::post('product/add', [ProductoController::class, 'Add'])->name('product.add');
+
+    Route::put('/product/update}', [ProductoController::class, 'update'])->name('product.update');
+    Route::delete('/product/{id}', [ProductoController::class, 'destroy'])->name('product.destroy');
+
+    //Servicio
+    Route::get('service/servicios', [ServiceController::class, 'ShowServicios'])->name('servicios');
+    Route::get('service/{id}/edit', [ServiceController::class, 'edit'])->name('service.edit');
+
+    Route::get('service/add', [ServiceController::class, 'ShowAddForm'])->name('service.add');
+    Route::post('service/add', [ServiceController::class, 'Add'])->name('service.add');
+
+    Route::put('/service/update}', [ServiceController::class, 'update'])->name('service.update');
+    Route::delete('/service/{id}', [ServiceController::class, 'destroy'])->name('service.destroy');
+
+});
+
+/*Route::get('/admin', function () {
     return view('admin.index');
-})->name('admin')->middleware('auth');
+})->name('admin')->middleware('auth');*/

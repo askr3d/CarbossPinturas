@@ -44,7 +44,7 @@ class LoginController extends Controller
 
         // Intentar autenticar al usuario
         Auth::login($user);
-         return redirect()->intended('/admin');
+         return redirect()->intended('/admin/index');
 
     }
 
