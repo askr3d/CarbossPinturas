@@ -32,7 +32,7 @@ class ServiceController extends Controller
     // Validar los datos del formulario
     $request->validate([
         'id_servicio' => 'required|numeric',
-        'nombre' => 'required|string|max:30|unique:servicios',
+        'nombre' => 'required|string|max:30|',
         'costo_por_m2' => 'required|numeric'
     ]);
 

@@ -12,13 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'name',
         'email',
         'password',
-        'permiso_id',
+        'fk_permiso',
     ];
 
     protected $hidden = [

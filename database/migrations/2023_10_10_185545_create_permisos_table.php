@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('permisos', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id_permiso', false, true)->unique();
             $table->string('nombre');
             $table->timestamps();
         });

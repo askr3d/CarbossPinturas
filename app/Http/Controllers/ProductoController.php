@@ -32,7 +32,7 @@ class ProductoController extends Controller
     // Validar los datos del formulario
     $request->validate([
         'id_producto' => 'required|numeric',
-        'nombre' => 'required|string|max:30|unique:productos',
+        'nombre' => 'required|string|max:30|',
         'precio' => 'required|numeric',
         'descripcion' => 'nullable|string|max:50',
         'existencia' => 'required|numeric',

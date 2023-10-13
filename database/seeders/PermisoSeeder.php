@@ -14,9 +14,11 @@ class PermisoSeeder extends Seeder
     public function run(): void
     {
         Permiso::create([
+            'id_permiso' =>'1',
             'nombre' => 'Administrador'
         ]);
         Permiso::create([
+            'id_permiso' =>'2',
             'nombre' => 'Cliente'
         ]);
     }

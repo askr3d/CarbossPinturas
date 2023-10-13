@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'Administrador',
             'email' => 'admin@gmail.com',
             'password' => 'password',
-            'permiso_id' => 1
+            'fk_permiso' => 1
         ]);
     }
 }

@@ -29,8 +29,7 @@ class RegisterController extends Controller
             'name.regex' => 'El campo nombre no debe contener espacios ni caracteres especiales. Utilice solo letras y números.',
         ]);
 
-        unset($validatedData['updated_at']);
-        unset($validatedData['created_at']);
+        $validatedData['fk_permiso'] = '2';
 
         $user = User::create($validatedData);
         return redirect()->route('login')->with('success', '¡Registro exitoso! Por favor inicia sesión.');;

@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('permiso_id')->default('2')->constrained()->onDelete('cascade');
+            $table->foreignId('fk_permiso')->constrained('permisos')->references('id_permiso')->onDelete('cascade');
+            /*$table->foreign('fk_permiso')->references('id_permiso')->on('permisos');*/
         });
     }
 

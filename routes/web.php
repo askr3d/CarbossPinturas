@@ -41,7 +41,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::prefix('admin')->middleware('auth')->group(function (){
 
-    Route::get('index', [AdminController::class, 'index'])->name('index');
+    Route::get('index', [AdminController::class, 'index'])->name('admin');
 
     //Productos
     Route::get('product/productos', [ProductoController::class, 'ShowProductos'])->name('productos');
