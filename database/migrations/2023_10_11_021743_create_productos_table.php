@@ -14,8 +14,10 @@ return new class extends Migration
             $table->id('id_producto');
             $table->string('nombre',30)->unique();
             $table->text('descripcion');
+            $table->string('imagen',255)->unique();
             $table->decimal('precio', 10, 2);
             $table->integer('existencia');
+            $table->timestamps();
         });
     }
 

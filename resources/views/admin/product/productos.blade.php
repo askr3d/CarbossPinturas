@@ -11,7 +11,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  
+
                 Agregar
             </a>
         </div>
@@ -22,6 +22,7 @@
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
+                        <th>Imagen</th>
                         <th>Precio</th>
                         <th>Existencia</th>
                         <th>Acciones</th>
@@ -33,6 +34,7 @@
                             <td>{{ $product->id_producto }}</td>
                             <td>{{ $product->nombre }}</td>
                             <td>{{ $product->descripcion }}</td>
+                            <td><img src="{{asset($product->imagen)}}" alt="{{$product->nombre}}"></td>
                             <td>{{ $product->precio }}</td>
                             <td>{{ $product->existencia }}</td>
                             <td>
@@ -43,7 +45,7 @@
                                           </svg>
                                         Editar
                                     </a>
-        
+
                                     <form action="{{ route('product.destroy', $product->id_producto) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
@@ -56,7 +58,7 @@
                                     </form>
                                 </div>
                             </td>
-    
+
                         </tr>
                     @endforeach
                 </tbody>

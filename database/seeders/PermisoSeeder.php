@@ -15,11 +15,11 @@ class PermisoSeeder extends Seeder
     {
         Permiso::create([
             'id_permiso' =>'1',
-            'nombre' => 'Administrador'
+            'nombre' => 'Admin'
         ]);
         Permiso::create([
             'id_permiso' =>'2',
-            'nombre' => 'Cliente'
+            'nombre' => 'Client'
         ]);
     }
 }

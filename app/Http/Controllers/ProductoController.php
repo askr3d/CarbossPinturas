@@ -22,6 +22,12 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         $productdelete = Producto::where('id_producto', $id)->firstOrFail();
+
+        if (file_exists($productdelete->imagen)) {
+            unlink($productdelete->imagen); // Eliminar la imagen del servidor
+        }
+
+
         $productdelete->delete();
 
         return redirect()->route('productos')->with('success', 'Producto eliminado exitosamente.');
@@ -34,6 +40,7 @@ class ProductoController extends Controller
         'id_producto' => 'required|numeric',
         'nombre' => 'required|string|max:30|',
         'precio' => 'required|numeric',
+        'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         'descripcion' => 'nullable|string|max:50',
         'existencia' => 'required|numeric',
     ]);
@@ -48,6 +55,21 @@ class ProductoController extends Controller
         $product->nombre = $request->input('nombre');
         $product->precio = $request->input('precio');
         $product->descripcion = $request->input('descripcion');
+
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $destinationPath = 'img/products/';
+            $imagenNombre = time() . '.' . $imagen->getClientOriginalExtension();
+            $imagen->move($destinationPath, $imagenNombre);
+
+            $imagen_old = $product->imagen;
+            $product->imagen = $destinationPath . $imagenNombre;
+
+            if (file_exists(public_path($imagen_old))) {
+                unlink(public_path($imagen_old));
+            }
+        }
+
         $product->existencia = $request->input('existencia');
         $product->save();
 
@@ -64,13 +86,24 @@ class ProductoController extends Controller
 
         'nombre' => 'required|unique:productos|string|max:30',
         'precio' => 'required|numeric',
+        'imagen' => 'required|unique:productos|max:255|image|mimes:jpeg,png,jpg,gif|max:2048',
         'descripcion' => 'nullable|string|max:50',
         'existencia' => 'required|numeric',
 
     ]);
 
-    // Crear un nuevo producto
+        // Crear un nuevo producto
     $product = new Producto();
+
+    if ($request->hasFile('imagen')) {
+        $imagen = $request->file('imagen');
+        $destinationPath = 'img/products/';
+        $imagenNombre = time() . '.' . $imagen->getClientOriginalExtension();
+        $imagen->move($destinationPath, $imagenNombre);
+
+        $product->imagen = $destinationPath . $imagenNombre;
+    }
+
     $product->nombre = $request->input('nombre');
     $product->precio = $request->input('precio');
     $product->descripcion = $request->input('descripcion');

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_servicio');
             $table->string('nombre', 30);
             $table->decimal('costo_por_m2', 10,2);
+            $table->timestamps();
         });
     }
 

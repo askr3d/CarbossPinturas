@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('fk_permiso')->constrained('permisos')->references('id_permiso')->onDelete('cascade');
-            /*$table->foreign('fk_permiso')->references('id_permiso')->on('permisos');*/
         });
     }
 
@@ -23,8 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['permiso_id']);
-            $table->dropColumn('permiso_id');
+            $table->dropForeign(['fk_permiso']);
+            $table->dropColumn('fk_permiso');
         });
     }
 };

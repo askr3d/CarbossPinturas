@@ -13,11 +13,15 @@
         <header class="p-10 bg-white border-b shadow">
             <div class="md:flex container mx-auto justify-between items-center">
                 <h1 class="text-4xl font-bold text-center mb-10 md:mb-0">
-                    <a href="/">Carboss Pinturas</a>
+                    <a href="{{route('index')}}">Carboss Pinturas</a>
                 </h1>
                 @auth
                     <nav class="flex flex-col md:flex-row gap-6 items-center">
                         <h2 class="block text-center md:inline font-black uppercase  text-sm mb-5 md:mb-0">{{ Auth::user()->name }}</h2>
+                        @if(\Illuminate\Support\Str::startsWith(request()->path(), 'client/'))
+                        <a href="{{ route('client.index') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Tienda</a>
+                        <a href="{{ route('client.cart.carrito') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Carrito @if($cantidadCarrito > 0){{$cantidadCarrito}}@endif</a>
+                        @endif
                         <a href="{{ route('logout') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Cerrar sesion</a>
                     </nav>
                 @endauth
@@ -30,7 +34,7 @@
             </div>
         </header>
 
-        
+
         <main class="container mx-auto mt-10">
             <h2 class="font-black mb-10 text-center text-3xl">
                 @yield('titulo')

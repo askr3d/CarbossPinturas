@@ -19,5 +19,17 @@ class UserSeeder extends Seeder
             'password' => 'password',
             'fk_permiso' => 1
         ]);
+        User::create([
+            'name' => 'Roman',
+            'email' => 'roman@gmail.com',
+            'password' => '1234',
+            'fk_permiso' => 2
+        ]);
+        User::create([
+            'name' => 'Sergio',
+            'email' => 'sergio@gmail.com',
+            'password' => '1234',
+            'fk_permiso' => 2
+        ]);
     }
 }

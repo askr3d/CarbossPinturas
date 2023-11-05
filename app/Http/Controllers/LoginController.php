@@ -13,8 +13,13 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (auth()->check()) {
-            return redirect()->route('admin');
-        }
+            if(Auth::user()->permiso->nombre === 'Admin'){
+                return redirect('admin/index');
+            } else if (Auth::user()->permiso->nombre=== 'Client'){
+                return redirect('client/index');
+            }
+
+         }
 
         return view('auth.login');
     }
@@ -43,14 +48,27 @@ class LoginController extends Controller
         }
 
         // Intentar autenticar al usuario
-        Auth::login($user);
-         return redirect()->intended('/admin/index');
+        if (Auth::attempt($credentials)) {
+            // El usuario ha iniciado sesión correctamente. Ahora determina su rol.
+            $user = Auth::user();
+
+            // Asumimos que tienes una relación 'permiso' en tu modelo User.
+            $permiso = $user->permiso;
+
+            if ($permiso->nombre === 'Admin') {
+                // El usuario es un administrador, redirige a la vista de administrador.
+                return redirect('admin/index');
+            } elseif ($permiso->nombre === 'Client') {
+                // El usuario es un cliente, redirige a la vista de cliente.
+                return redirect('client/index');
+            }
+        }
 
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/login')->with('error', 'Credenciales incorrectas o permiso no válido.');
     }
 }

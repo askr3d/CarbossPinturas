@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Servicio extends Model
 {
     protected $primaryKey = 'id_servicio';
-    public $timestamps = false;
 
 
     use HasFactory;

@@ -14,9 +14,12 @@ class RegisterController extends Controller
     public function show(){
 
         if (auth()->check()) {
-            return redirect()->route('admin');
+            if(Auth::user()->permiso->nombre === 'Admin'){
+                return redirect('admin/index');
+            } else if (Auth::user()->permiso->nombre=== 'Client'){
+                return redirect('client/index');
+            }
         }
-
         return view('auth.register');
     }
     public function register(Request $request){
