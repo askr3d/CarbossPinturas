@@ -13,12 +13,15 @@
         object-fit: cover; /* Controla cómo se ajusta la imagen dentro del espacio asignado */
     }
 </style>
-<a href="../../../">Inicio</a> / <a href="">Tienda</a> /
-
     <div class="container">
         <div class="row">
             @foreach($products as $product)
                 <div class="col-md-4 mb-3">
+                @if(isset($orden))
+                    <a href="{{ route('client.productidorder', ['id_orden'=> $orden->id_orden, 'id_producto' => $product->id_producto])}}">
+                @else
+                    <a href="{{ route('client.product', ['id_producto' => $product->id_producto])}}">
+                @endif
                     <div class="card">
                         <!-- Muestra la imagen del producto -->
                         <img class="card-img-top" src="{{ asset($product->imagen) }}" alt="{{$product->nombre}}">
@@ -27,9 +30,10 @@
                             <p class="card-text">Descripcion: {{ $product->descripcion }}</p>
                             <p class="card-text">Existencias: {{ $product->existencia }}</p>
                             <p class="card-text">Precio: ${{ $product->precio }}</p>
-                            <a href="{{ route('client.cart.add', $product->id_producto) }}">Agregar al carrito</a>
+                            </a>
                         </div>
                     </div>
+                </a>
                 </div>
             @endforeach
         </div>

@@ -13,7 +13,6 @@
         object-fit: cover; /* Controla cómo se ajusta la imagen dentro del espacio asignado */
     }
 </style>
-<a href={{ route('index') }}>Inicio</a> / <a href="{{ route('client.index') }}">Tienda</a> / <a href="">Carrito</a>
     @if(!empty($carrito))
         @foreach ($carrito as $products)
             <div class="col-md-4 mb-3">

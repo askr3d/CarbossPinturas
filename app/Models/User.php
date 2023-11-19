@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Permiso::class, 'fk_permiso','id_permiso');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Orden::class, 'fk_user');
+    }
 }

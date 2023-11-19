@@ -17,11 +17,15 @@
                 </h1>
                 @auth
                     <nav class="flex flex-col md:flex-row gap-6 items-center">
-                        <h2 class="block text-center md:inline font-black uppercase  text-sm mb-5 md:mb-0">{{ Auth::user()->name }}</h2>
-                        @if(\Illuminate\Support\Str::startsWith(request()->path(), 'client/'))
-                        <a href="{{ route('client.index') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Tienda</a>
-                        <a href="{{ route('client.cart.carrito') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Carrito @if($cantidadCarrito > 0){{$cantidadCarrito}}@endif</a>
+                        @if(\Illuminate\Support\Str::startsWith(request()->path(), 'client/',)||\Illuminate\Support\Facades\Route::is('index'))
+                            @if (isset($orden_seleccionada))
+                                <a href="{{ route('client.price.details') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">{{$orden_seleccionada->nombre}}</a>
+                            @endif
+                            <a href="{{ route('client.price.add') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Crear orden</a>
+                            <a href="{{ route('client.price') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Cotizaciones</a>
+                            <a href="{{ route('client.index') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Productos</a>
                         @endif
+                        <h2 class="block text-center md:inline font-black uppercase  text-sm mb-5 md:mb-0">{{ Auth::user()->name }}</h2>
                         <a href="{{ route('logout') }}" class="block text-center md:inline font-bold uppercase text-gray-600 text-sm mb-5 md:mb-0">Cerrar sesion</a>
                     </nav>
                 @endauth

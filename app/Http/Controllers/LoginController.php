@@ -68,6 +68,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        session()->flush();
         Auth::logout();
         return redirect('/login')->with('error', 'Credenciales incorrectas o permiso no válido.');
     }
