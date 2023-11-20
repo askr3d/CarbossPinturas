@@ -59,7 +59,7 @@
         </div>
         <div class="grid grid-cols-3 gap-4 h-screen overflow-y-auto pr-2 w-4/5">
             @foreach ($ordenConProductos as $products)
-                <div class="bg-white rounded-md">
+                <div class="bg-white rounded-md h-fit">
                     <div class="card">
                         <div class="card-body">
                             <img class="object-cover w-full h-48 rounded-t-md" src="{{ asset($products->producto->imagen) }}" alt="{{$products->producto->nombre}}">
