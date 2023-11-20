@@ -14,26 +14,25 @@
     }
 </style>
     <div class="container">
-        <div class="row">
+        <div class="grid md:grid-cols-5 gap-4">
             @foreach($products as $product)
-                <div class="col-md-4 mb-3">
-                @if(isset($orden))
-                    <a href="{{ route('client.productidorder', ['id_orden'=> $orden->id_orden, 'id_producto' => $product->id_producto])}}">
-                @else
-                    <a href="{{ route('client.product', ['id_producto' => $product->id_producto])}}">
-                @endif
-                    <div class="card">
-                        <!-- Muestra la imagen del producto -->
-                        <img class="card-img-top" src="{{ asset($product->imagen) }}" alt="{{$product->nombre}}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $product->nombre }}</h5>
-                            <p class="card-text">Descripcion: {{ $product->descripcion }}</p>
-                            <p class="card-text">Existencias: {{ $product->existencia }}</p>
-                            <p class="card-text">Precio: ${{ $product->precio }}</p>
-                            </a>
+                <div class="rounded-md bg-white border-2 border-neutral-200 shadow-sm hover:shadow-xl transition-shadow">
+                    @if(isset($orden))
+                        <a href="{{ route('client.productidorder', ['id_orden'=> $orden->id_orden, 'id_producto' => $product->id_producto])}}">
+                    @else
+                        <a href="{{ route('client.product', ['id_producto' => $product->id_producto])}}">
+                    @endif
+                        <div class="card">
+                            <!-- Muestra la imagen del producto -->
+                            <img class="object-cover w-full h-48 rounded-t-md" src="{{ asset($product->imagen) }}" alt="{{$product->nombre}}">
+                            <div class="p-4">
+                                <h5 class="text-gray-800 font-semibold">{{ $product->nombre }}</h5>
+                                {{-- <p class="card-text">Descripcion: {{ $product->descripcion }}</p>
+                                <p class="card-text">Existencias: {{ $product->existencia }}</p> --}}
+                                <p class="text-2xl"><span class="font-bold">${{ $product->precio }}</span></p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 </div>
             @endforeach
         </div>
