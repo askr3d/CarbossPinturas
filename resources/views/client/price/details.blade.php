@@ -33,7 +33,7 @@
                             <option value="{{$servicio->id_servicio}}">{{$servicio->nombre}}</option>
                         @endforeach
                     </select>
-                    
+
                     <p class="text-sm pl-4">
                         Costo por MT2 <span class="font-bold text-base text-neutral-700">$<span id="precio">0.00</span></span>
                     </p>
@@ -43,7 +43,7 @@
                     <label>Metros a pintar: </label>
                     <input class="w-10 border border-gray-200 text-base h-6 rounded-md text-center" type="number" name="metros" id="metros" placeholder="Metros a pintar" required min="1"  oninput="updatePrice()" value="1">
                 </div>
-    
+
                 <div class="flex justify-between">
                     <p>Impuesto: </p><span class="font-bold text-neutral-700" id="impuesto"></span>
                 </div>
@@ -54,7 +54,7 @@
                     <p class="text-gray-600 font-bold text-xl">Precio Total: </p><span class="font-bold text-neutral-700" id="precioTotal"></span>
                 </div>
 
-                <input type="submit" class="mt-3 border border-gray-300 bg-sky-500 hover:bg-sky-600 transition-colors text-white font-bold p-2 rounded-md" value ="Finalizar y descargar">
+                <input type="submit" class="mt-3 border border-gray-300 bg-sky-500 hover:bg-sky-600 transition-colors text-white font-bold p-2 rounded-md" value ="Finalizar">
             </form>
         </div>
         <div class="grid grid-cols-3 gap-4 h-screen overflow-y-auto pr-2 w-4/5">

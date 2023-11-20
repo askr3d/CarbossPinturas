@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::middleware(['web'])->group(function(){
-    Route::get('/index', [WelcomeController::class, 'index'])->name("index");
+    Route::get('/', [WelcomeController::class, 'index'])->name("index");
 
     Route::get('/register', [RegisterController::class, 'show']);
     Route::post('/register', [RegisterController::class, 'register']);

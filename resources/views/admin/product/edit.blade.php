@@ -65,5 +65,28 @@
             </div>
             <button type="submit" class="bg-sky-600 hover:bg-sky-700 p-2 rounded-md block w-full text-white font-bold transition-colors">Guardar cambios</button>
         </form>
+            <div>
+                <img id="imagePreview" src="" alt="Vista previa de la imagen">
+            </div>
     </div>
+    <script>
+        // Obtener referencias a los elementos del DOM
+        const inputFile = document.getElementById('imagen');
+        const imagePreview = document.getElementById('imagePreview');
+
+        // Agregar un evento de cambio al campo de carga de archivos
+        inputFile.addEventListener('change', function () {
+          // Verificar si se ha seleccionado un archivo
+          if (inputFile.files && inputFile.files[0]) {
+            // Crear un objeto URL para la imagen seleccionada
+            const imageUrl = URL.createObjectURL(inputFile.files[0]);
+
+            // Establecer la fuente de la imagen en el elemento img
+            imagePreview.src = imageUrl;
+          }else {
+                // Si no se selecciona un archivo, borrar la imagen
+                imagePreview.src = "";
+            }
+        });
+      </script>
 @endsection
