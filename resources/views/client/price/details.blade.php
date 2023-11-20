@@ -18,28 +18,28 @@
         object-fit: cover; /* Controla cómo se ajusta la imagen dentro del espacio asignado */
     }
 </style>
-    @if(isset($ordenConProductos))
-    <p>{{$orden_seleccionada->nombre}}</p>
-    <p >
-        Servicio
-    </p>
-    <form action="{{route('client.price.finalize')}}" method="POST">
-        @csrf
-        <select name="servicio" id="servicioSelect" onchange="updatePrice()" required>
-            @foreach($servicios as $servicio)
-                <option value="{{$servicio->id_servicio}}">{{$servicio->nombre}}</option>
-            @endforeach
-        </select>
-        <label>Metros a pintar:</label>
-        <input type="number" name="metros" id="metros" placeholder="Metros a pintar" required min="1"  oninput="updatePrice()" value="1">
+@if(isset($ordenConProductos) )
+    @if($ordenConProductos->count() > 0)
+            <p>{{$orden_seleccionada->nombre}}</p>
+            <p >
+                Servicio
+            </p>
+            <form action="{{route('client.price.finalize')}}" method="POST">
+                @csrf
+                <select name="servicio" id="servicioSelect" onchange="updatePrice()" required>
+                    @foreach($servicios as $servicio)
+                        <option value="{{$servicio->id_servicio}}">{{$servicio->nombre}}</option>
+                    @endforeach
+                </select>
+                <label>Metros a pintar:</label>
+                <input type="number" name="metros" id="metros" placeholder="Metros a pintar" required min="1"  oninput="updatePrice()" value="1">
 
-        <p>Costo por mt2: $<span id="precio">0.00</span></p>
-        <p>Impuesto: <span id="impuesto"></span></p>
-        <p>Subtotal: <span id="subtotal"></span></p>
-        <p>Precio Total: <span id="precioTotal"></span></p>
-        <input type="submit" class="border 1" value ="Finalizar y descargar">
-    </form>
-
+                <p>Costo por mt2: $<span id="precio">0.00</span></p>
+                <p>Impuesto: <span id="impuesto"></span></p>
+                <p>Subtotal: <span id="subtotal"></span></p>
+                <p>Precio Total: <span id="precioTotal"></span></p>
+                <input type="submit" class="border 1" value ="Finalizar y descargar">
+            </form>
 
     <script>
         var servicios = @json($servicios);
@@ -110,6 +110,7 @@
     @else
             <p>No existen productos en la orden</p>
     @endif
+@endif
 @endsection
 <script>
     function confirmarEliminacion() {

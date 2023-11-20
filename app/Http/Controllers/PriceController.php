@@ -40,7 +40,8 @@ class PriceController extends Controller
             if($orden_seleccionada){
                 $ordenConProductos = ProductosEnOrden::where('fk_orden', $orden_seleccionada->id_orden)->with('producto')->get();
             }else
-                return view('client.price.details', compact('orden_seleccionada'));
+                // return view('client.price.details', compact('orden_seleccionada'));
+                return redirect::action('client.price.price');
 
             return view('client.price.details', compact('orden_seleccionada','ordenConProductos', 'servicios' ));
         }else
@@ -75,8 +76,8 @@ class PriceController extends Controller
 
         $orden_seleccionada = Session()->get('orden_seleccionada');
 
-        $productosdelete = ProductosEnOrden::where('fk_producto', $fk_producto)->firstOrFail();
         $orden = Orden::where('id_orden', $orden_seleccionada->id_orden)->first();
+        $productosdelete = ProductosEnOrden::where('fk_producto', $fk_producto) ->where('fk_orden', $orden->id_orden)->firstOrFail();
         $producto = Producto::where('id_producto', $fk_producto)->first();
 
         $orden->update([
@@ -100,33 +101,36 @@ class PriceController extends Controller
     public function finalize_orden(Request $request)
     {
         $orden_seleccionada= session()->get('orden_seleccionada');
-        $request->validate([
-            'servicio'=> 'required',
-            'metros'=> 'required|min:1',
-        ]);
-        $servicio = Servicio::where('id_servicio', $request->input("servicio"))->firstOrFail();
-        $orden = Orden::where('id_orden',$orden_seleccionada->id_orden)->first();
-        $ExisteServicio = ServiciosEnOrden::where('fk_orden',$orden_seleccionada->id_orden)->first();
-        $monto = $servicio->costo_por_m2 * $request->input("metros");
-        if($orden_seleccionada)
-            if($ExisteServicio){
-                return Redirect()->back();
-            }
-        $ServiceToOrden = new ServiciosEnOrden();
-        $ServiceToOrden->precio = $monto;
-        $ServiceToOrden->metros = $request->input("metros");
-        $ServiceToOrden->fk_orden = $orden_seleccionada->id_orden;
-        $ServiceToOrden->fk_servicio = $request->input("servicio");
-        $ServiceToOrden->save();
+        if($orden_seleccionada){
+            $request->validate([
+                'servicio'=> 'required',
+                'metros'=> 'required|min:1',
+            ]);
+            $servicio = Servicio::where('id_servicio', $request->input("servicio"))->firstOrFail();
+            $orden = Orden::where('id_orden',$orden_seleccionada->id_orden)->first();
+            $ExisteServicio = ServiciosEnOrden::where('fk_orden',$orden_seleccionada->id_orden)->first();
+            $monto = $servicio->costo_por_m2 * $request->input("metros");
+            if($orden_seleccionada)
+                if($ExisteServicio){
+                    return Redirect()->back();
+                }
+            $ServiceToOrden = new ServiciosEnOrden();
+            $ServiceToOrden->precio = $monto;
+            $ServiceToOrden->metros = $request->input("metros");
+            $ServiceToOrden->fk_orden = $orden_seleccionada->id_orden;
+            $ServiceToOrden->fk_servicio = $request->input("servicio");
+            $ServiceToOrden->save();
 
-        $orden->update([
-            'status' => "Finalizada",
-            'precio_total' => $orden->precio_total + $monto,
-        ]);
+            $orden->update([
+                'status' => "Finalizada",
+                'precio_total' => $orden->precio_total + $monto,
+            ]);
 
-        Session()->forget('orden_seleccionada');
+            Session()->forget('orden_seleccionada');
 
-        return redirect()->route('client.price.factura', ['id_orden' => $orden->id_orden]);
+            return redirect()->route('client.price.factura', ['id_orden' => $orden->id_orden]);
+        }else
+            return redirect()->route('client.price');
     }
 
     public function GenerarFactura($id_orden)
