@@ -16,7 +16,7 @@
     <div class="container">
         <div class="grid md:grid-cols-5 gap-4">
             @foreach($products as $product)
-                <div class="rounded-md bg-white border-2 border-neutral-200 shadow-sm hover:shadow-xl transition-shadow">
+                <div class="rounded-lg bg-white border-2 border-neutral-200 shadow-sm hover:shadow-xl transition-shadow">
                     @if(isset($orden))
                         <a href="{{ route('client.productidorder', ['id_orden'=> $orden->id_orden, 'id_producto' => $product->id_producto])}}">
                     @else
