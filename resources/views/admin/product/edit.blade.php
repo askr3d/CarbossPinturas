@@ -3,8 +3,8 @@
     Editar Producto
 @endsection
 @section('contenido')
-    <div class="flex justify-start">
-        <form action="{{ route('product.update', $product->id_producto) }}" method="POST" enctype="multipart/form-data" class="bg-neutral-100 w-1/2 p-4 rounded-md">
+    <div class="grid grid-cols-2 gap-2">
+        <form action="{{ route('product.update', $product->id_producto) }}" method="POST" enctype="multipart/form-data" class="bg-neutral-100 p-4 rounded-md">
             @csrf
             @method('PUT')
             <input type="hidden" name="id_producto" value="{{ $product->id_producto }}">
@@ -65,9 +65,10 @@
             </div>
             <button type="submit" class="bg-sky-600 hover:bg-sky-700 p-2 rounded-md block w-full text-white font-bold transition-colors">Guardar cambios</button>
         </form>
-            <div>
-                <img id="imagePreview" src="" alt="Vista previa de la imagen">
-            </div>
+        <div class="flex flex-col justify-star items-center">
+            <p class="text-3xl mb-2 font-bold">Vista previa</p>
+            <img class="object-cover h-80 w-80 rounded-lg" id="imagePreview">
+        </div>
     </div>
     <script>
         // Obtener referencias a los elementos del DOM

@@ -3,8 +3,8 @@
     Agregar Producto
 @endsection
 @section('contenido')
-    <div class="flex justify-start">
-        <form action="add" method="POST" enctype="multipart/form-data" class="bg-neutral-100 p-4 rounded-md w-1/2">
+    <div class="grid grid-cols-2 gap-2">
+        <form action="add" method="POST" enctype="multipart/form-data" class="bg-neutral-100 p-4 rounded-md">
             @csrf
             <div class="mb-3">
                 <label for="nombre" class="block font-bold text-gray-500 uppercase">
@@ -67,8 +67,9 @@
                 Guardar
             </button>
         </form>
-        <div>
-            <img id="imagePreview" src="" alt="Vista previa de la imagen">
+        <div class="flex flex-col justify-star items-center">
+            <p class="text-3xl mb-2 font-bold">Vista previa</p>
+            <img class="object-cover h-80 w-80 rounded-lg" id="imagePreview">
         </div>
     </div>
     <script>
